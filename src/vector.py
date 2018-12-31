@@ -1,4 +1,6 @@
 import numbers
+from functools import reduce
+from math import sqrt
 
 
 class Vector(object):
@@ -45,3 +47,11 @@ class Vector(object):
 
         else:
             raise TypeError("Unsupported type: {}".format(type(other)).__name__)
+
+    # magnitude of the vector
+    def magnitude(self):
+        total = reduce((lambda x,y: x + y ** 2), self.coordinates, 0)
+        return sqrt(total)
+
+    def normalize(self):
+        return self * (1 / self.magnitude())
