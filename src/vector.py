@@ -53,5 +53,9 @@ class Vector(object):
         total = reduce((lambda x,y: x + y ** 2), self.coordinates, 0)
         return sqrt(total)
 
+    # finds unit vector in same direction as this vector
     def normalize(self):
-        return self * (1 / self.magnitude())
+        try:
+            return self * (1 / self.magnitude())
+        except ZeroDivisionError:
+            raise Exception("Cannot normalize the zero vector")
