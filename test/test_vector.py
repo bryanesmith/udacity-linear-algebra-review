@@ -41,6 +41,24 @@ class TestVector(unittest.TestCase):
         v1 = Vector([1.996, 3.108, -4.554])
         self.__almostEqual(v1.normalize().coordinates, [0.3404012959433014, 0.5300437012984873, -0.7766470449528029])
 
+    def test_dot_product(self):
+        v1 = Vector([7.887, 4.138])
+        v2 = Vector([-8.802, 6.776])
+        self.assertAlmostEquals(v1.dot_product(v2), -41.382286)
+
+        v3 = Vector([-5.955, -4.904, -1.874])
+        v4 = Vector([-4.496, -8.755, 7.103])
+        self.assertAlmostEquals(v3.dot_product(v4), 56.397178000000004)
+
+    def test_angle_radians(self):
+        v5 = Vector([3.183, -7.627])
+        v6 = Vector([-2.668, 5.319])
+        self.assertAlmostEquals(v5.angle_radians(v6), 3.0720263098372476)
+
+    def test_angle_degress(self):
+        v7 = Vector([7.35, 0.221, 5.188])
+        v8 = Vector([2.751, 8.259, 3.985])
+        self.assertAlmostEquals(v7.angle_degrees(v8), 60.27581120523091)
 
 if __name__ == '__main__':
     unittest.main()
