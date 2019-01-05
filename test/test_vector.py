@@ -65,5 +65,18 @@ class TestVector(unittest.TestCase):
         v8 = Vector([2.751, 8.259, 3.985])
         self.assertAlmostEqual(v7.angle_degrees(v8), Decimal(60.27581120523091))
 
+    def test_parallel(self):
+        self.assertTrue(Vector([-7.579, -7.88]).is_parallel(Vector([22.737,23.64])))
+        self.assertFalse(Vector([-2.029, 9.97, 4.172]).is_parallel(Vector([-9.231, -6.639, -7.245])))
+        self.assertFalse(Vector([-2.328, -7.284, -1.214]).is_parallel(Vector([-1.821, 1.072, -2.94])))
+        self.assertTrue(Vector([2.18, 4.827]).is_parallel(Vector([0,0])))
+
+    def test_orthogonal(self):
+        self.assertFalse(Vector([-7.579, -7.88]).is_orthogonal(Vector([22.737,23.64])))
+        self.assertFalse(Vector([-2.029, 9.97, 4.172]).is_orthogonal(Vector([-9.231, -6.639, -7.245])))
+        self.assertTrue(Vector([-2.328, -7.284, -1.214]).is_orthogonal(Vector([-1.821, 1.072, -2.94])))
+        self.assertTrue(Vector([2.18, 4.827]).is_orthogonal(Vector([0,0])))
+
+
 if __name__ == '__main__':
     unittest.main()

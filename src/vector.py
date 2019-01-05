@@ -4,7 +4,16 @@ from math import acos, degrees
 from numbers import Number
 
 
+DEC_QUANTIZE = "0.0000000001"
+
+
+# Whether two decimals are basically equal
+def is_equal(d1: Decimal, d2: Decimal) -> bool:
+    return d1.quantize(Decimal(DEC_QUANTIZE)) == d2.quantize(Decimal(DEC_QUANTIZE))
+
+
 class Vector(object):
+
     def __init__(self, coordinates: [Number]):
         try:
             if not coordinates:
@@ -72,3 +81,11 @@ class Vector(object):
     # finds angle in degrees between two vectors
     def angle_degrees(self, other: 'Vector') -> Decimal:
         return Decimal(degrees(self.angle_radians(other)))
+
+    # returns whether or not two vectors are parallel
+    def is_parallel(self, other: 'Vector') -> bool:
+        return is_equal(self.dot_product(other).copy_abs(), (self.magnitude() * other.magnitude()).copy_abs())
+
+    # returns whether or not two vectors are orthogonal (right angles)
+    def is_orthogonal(self, other: 'Vector') -> bool:
+        return is_equal(self.dot_product(other).copy_abs(), Decimal(0))
