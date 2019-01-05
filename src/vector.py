@@ -1,6 +1,7 @@
 import numbers
 from functools import reduce
 from math import sqrt, acos, degrees
+from decimal import Decimal
 
 
 class Vector(object):
@@ -8,7 +9,7 @@ class Vector(object):
         try:
             if not coordinates:
                 raise ValueError
-            self.coordinates = tuple(coordinates)
+            self.coordinates = tuple([Decimal(x) for x in coordinates])
             self.dimension = len(coordinates)
 
         except ValueError:
@@ -37,7 +38,7 @@ class Vector(object):
     def __mul__(self, other):
 
         if isinstance(other, numbers.Number):
-            return Vector([x * other for x in self.coordinates])
+            return Vector([x * Decimal(other) for x in self.coordinates])
 
         else:
             raise TypeError("Unsupported type: {}".format(type(other)).__name__)
@@ -50,7 +51,7 @@ class Vector(object):
     # magnitude of the vector
     def magnitude(self):
         total = reduce((lambda x,y: x + y ** 2), self.coordinates, 0)
-        return sqrt(total)
+        return Decimal(sqrt(total))
 
     # finds unit vector in same direction as this vector
     def normalize(self):
