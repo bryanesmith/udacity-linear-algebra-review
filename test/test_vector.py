@@ -77,6 +77,27 @@ class TestVector(unittest.TestCase):
         self.assertTrue(Vector([-2.328, -7.284, -1.214]).is_orthogonal(Vector([-1.821, 1.072, -2.94])))
         self.assertTrue(Vector([2.18, 4.827]).is_orthogonal(Vector([0,0])))
 
+    def test_projection_of(self):
+        v1 = Vector([3.039, 1.879])
+        b1 = Vector([0.825, 2.036])
+        self.assertVectorsAlmostEqual(b1.projection_of(v1).coordinates, arr2dec([1.082606962, 2.671742758]))
+
+        v2 = Vector([3.009, -6.172, 3.692, -2.51])
+        b2 = Vector([6.404, -9.144, 2.759, 8.718])
+        self.assertVectorsAlmostEqual(b2.projection_of(v2).coordinates,
+                                      arr2dec([1.968516167, -2.810760748, 0.848084963, 2.679813233]))
+
+    def test_orthogonal_component_of(self):
+        v1 = Vector([-9.88, -3.264, -8.159])
+        b1 = Vector([-2.155, -9.353, -9.473])
+        self.assertVectorsAlmostEqual(b1.orthogonal_component_of(v1).coordinates,
+                                      arr2dec([-8.350081043, 3.3760612542, -1.433746042]))
+
+        v2 = Vector([3.009, -6.172, 3.692, -2.51])
+        b2 = Vector([6.404, -9.144, 2.759, 8.718])
+        self.assertVectorsAlmostEqual(b2.orthogonal_component_of(v2).coordinates,
+                                      arr2dec([1.040483832, -3.361239251, 2.843915036, -5.189813233]))
+
 
 if __name__ == '__main__':
     unittest.main()

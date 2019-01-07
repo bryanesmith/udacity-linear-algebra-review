@@ -82,3 +82,12 @@ class Vector(object):
     # returns whether or not two vectors are orthogonal (right angles)
     def is_orthogonal(self, other: 'Vector', precision=1e-10) -> bool:
         return self.dot_product(other).copy_abs() < precision
+
+    # Finds projection of other vector on this vector
+    def projection_of(self, other: 'Vector') -> 'Vector':
+        return self.normalize() * other.dot_product(self.normalize())
+
+    # Finds the orthogonal component of another vector relative to this vector
+    #   (this component is orthogonal to the project, and with the other vector form a right triangle)
+    def orthogonal_component_of(self, other: 'Vector') -> 'Vector':
+        return other - self.projection_of(other)
